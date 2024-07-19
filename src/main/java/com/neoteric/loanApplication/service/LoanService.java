@@ -18,7 +18,13 @@ public class LoanService {
         double maxMonthlyPayments = savings * maxMonthlyPaymentPercentage;
         double monthlyPayment = calculateMonthlyPayments(loanApplication);
 
-        return  monthlyPayment <= maxMonthlyPayments;
+        if ( monthlyPayment <= maxMonthlyPayments){
+            System.out.println("You are eligible for loan");
+            return true;
+        }else{
+            System.out.println("Not eligible for loan");
+            return false;
+        }
 
 
     }
