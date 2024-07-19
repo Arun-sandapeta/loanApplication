@@ -10,6 +10,18 @@ public class LoanService {
     private static final double annualInterestRate = 5.0;
     // Static annual interest rate
 
+
+    public boolean isLoanAffordable(LoanApplication loanApplication){
+
+        double monthlySalary = loanApplication.getAnnualSalary()/12;
+        double savings = monthlySalary * savingPercentage;
+        double maxMonthlyPayments = savings * maxMonthlyPaymentPercentage;
+        double monthlyPayment = calculateMonthlyPayments(loanApplication);
+
+        return  monthlyPayment <= maxMonthlyPayments;
+
+
+    }
     public double calculateMonthlyPayments(LoanApplication loanApplication){
         double principle = loanApplication.getLoanAmount();
         int loanTermInYears = loanApplication.getLoanTermInYears();
@@ -23,17 +35,7 @@ public class LoanService {
         return monthlyPayment;
     }
 
-    public boolean isLoanAffordable(LoanApplication loanApplication){
 
-       double monthlySalary = loanApplication.getAnnualSalary()/12;
-       double savings = monthlySalary * savingPercentage;
-       double maxMonthlyPayments = savings * maxMonthlyPaymentPercentage;
-       double monthlyPayment = calculateMonthlyPayments(loanApplication);
-
-       return  monthlyPayment <= maxMonthlyPayments;
-
-
-    }
     public String processLoanApplication(LoanApplication loanApplication) {
         if (isLoanAffordable(loanApplication)) {
 
